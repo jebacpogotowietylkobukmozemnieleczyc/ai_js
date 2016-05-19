@@ -2,13 +2,41 @@
 <html>
 <head>
     <meta charset="utf-8" /><title>JavaScript</title>
+    <script src="livevalidation_standalone.js"></script>
+    <style>
+
+        /* validation.css file */
+        .LV_valid_field {
+            border: 1px solid rgba(0, 180, 0, 0.75);
+        }
+        .LV_invalid_field {
+            border: 1px solid rgba(240, 0, 0, 0.75);
+        }
+
+    </style>
+
+    <script>
+        function validate() {
+            var name = new LiveValidation('name', {validMessage: "Valid!"});
+            name.add(Validate.Presence);
+
+            var email = new LiveValidation('email', {validMessage: "Valid!"});
+            email.add(Validate.Email);
+
+            var kod = new LiveValidation('kod', {validMessage: "Valid!"});
+            kod.add(Validate.Format, {pattern: /^[0-9]{2}-[0-9]{3}$/});
+
+            var city = new LiveValidation('city', {validMessage: "Valid!"});
+            city.add(Validate.Presence);
+        }
+    </script>
 </head>
-<body>
+<body onload="validate()">
 <form name="dane_osobowe"><table>
-    <tr><td>Imię</td><td><input type="text" name="f_imie"></td></tr>
-    <tr><td>E-mail</td><td><input type="text" name="f_email"></td></tr>
-    <tr><td>Kod pocztowy</td><td><input type="text" name="f_kod"></td></tr>
-    <tr><td>Miasto</td><td><input type="text" name="f_miasto"></td></tr>
+    <tr><td>Imię</td><td><input type="text" id="name" name="f_imie" ></td></tr>
+    <tr><td>E-mail</td><td><input type="text" id="email" name="f_email"></td></tr>
+    <tr><td>Kod pocztowy</td><td><input type="text" id="kod" name="f_kod"></td></tr>
+    <tr><td>Miasto</td><td><input type="text" id="city" name="f_miasto"></td></tr>
     <tr><td colspan="2"><input type="submit" value="Prześlij"></td></tr>
 </table></form>
 </body>
